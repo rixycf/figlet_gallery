@@ -19,6 +19,17 @@
           node: document.getElementById('elm')
         });
 
+        app.ports.inputFigletJS.subscribe(function(input){
+            figlet(input, "Banner", function(err, text){
+                if (err) {
+                    console.log('something went wrong');
+                    console.dir(err);
+                    return;
+                }
+                app.ports.receiveFiglet.send(text);
+            });
+        });
+
     </script> 
     </body>
 </html>

@@ -1,4 +1,6 @@
-
+body {
+    background-color: #cccccc;
+}
 textarea {
     color: #00FF00;
     background-color: #000000;
