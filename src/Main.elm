@@ -4,6 +4,10 @@ import Browser
 import Html exposing (..)
 
 
+
+-- Model
+
+
 type alias Model =
     { input : String }
 
@@ -11,6 +15,10 @@ type alias Model =
 init : () -> ( Model, Cmd Msg )
 init _ =
     ( Model "", Cmd.none )
+
+
+
+-- Updatee
 
 
 type Msg
@@ -22,6 +30,10 @@ update msg model =
     case msg of
         Input input ->
             ( { model | input = input }, Cmd.none )
+
+
+
+-- View
 
 
 view : Model -> Html Msg
