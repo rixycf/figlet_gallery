@@ -2,6 +2,8 @@ module Main exposing (main)
 
 import Browser
 import Html exposing (..)
+import Html.Attributes exposing (class, cols, rows, value)
+import Html.Events exposing (onInput)
 
 
 
@@ -9,12 +11,12 @@ import Html exposing (..)
 
 
 type alias Model =
-    { input : String }
+    { input : String, figletFont : String }
 
 
 init : () -> ( Model, Cmd Msg )
 init _ =
-    ( Model "", Cmd.none )
+    ( Model "" "", Cmd.none )
 
 
 
@@ -38,7 +40,12 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div [] [ text "hello world" ]
+    div []
+        [ Html.form []
+            [ input [ value model.input, onInput Input ] []
+            ]
+        , div [ class "textarea" ] [ textarea [ rows 30, cols 100 ] [ text model.input ] ]
+        ]
 
 
 main : Program () Model Msg
