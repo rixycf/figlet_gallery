@@ -38,7 +38,7 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div [] [ text "hello" ]
+    div [] [ text "hello world" ]
 
 
 main : Program () Model Msg
