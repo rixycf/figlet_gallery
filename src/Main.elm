@@ -4,7 +4,8 @@ import Browser
 import FontList
 import Html exposing (..)
 import Html.Attributes exposing (class, cols, rows, value)
-import Html.Events exposing (onInput)
+import Html.Events as Events exposing (onInput)
+import Json.Decode as Json
 
 
 
@@ -56,8 +57,15 @@ update msg model =
             in
             ( { model | figletOp = newFigOp }, inputFigletJS newFigOp )
 
-        SelectFont font ->
-            ( model, Cmd.none )
+        SelectFont newFont ->
+            let
+                figOp =
+                    model.figletOp
+
+                newFigOp =
+                    { figOp | font = newFont }
+            in
+            ( { model | figletOp = newFigOp }, inputFigletJS newFigOp )
 
         ReceiveFiglet figlet ->
             ( { model | figletChars = figlet }, Cmd.none )
@@ -69,13 +77,23 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
+    let
+        handler selectedValue =
+            SelectFont selectedValue
+    in
     div []
-        [ div [] [ select [] (List.map pullDownMenu model.fontList) ]
+        [ div []
+            [ select [ onChange handler ] (List.map pullDownMenu model.fontList) ]
         , Html.form []
             [ input [ value model.figletOp.inputText, onInput Input ] []
             ]
         , div [ class "textarea" ] [ textarea [ rows 30, cols 100 ] [ text model.figletChars ] ]
         ]
+
+
+onChange : (String -> msg) -> Attribute msg
+onChange handler =
+    Events.on "change" (Json.map handler Events.targetValue)
 
 
 pullDownMenu : String -> Html Msg
