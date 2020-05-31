@@ -1,6 +1,7 @@
 port module Main exposing (main)
 
 import Browser
+import FontList
 import Html exposing (..)
 import Html.Attributes exposing (class, cols, rows, value)
 import Html.Events exposing (onInput)
@@ -11,7 +12,7 @@ import Html.Events exposing (onInput)
 
 
 type alias Model =
-    { figletOp : FigletOp, figletChars : String }
+    { figletOp : FigletOp, figletChars : String, fontList : List String }
 
 
 type alias FigletOp =
@@ -24,12 +25,12 @@ type alias FigletOp =
 
 initFigletOp : FigletOp
 initFigletOp =
-    FigletOp "" "Ghost" "dafault" "dafault"
+    FigletOp "" "ANSI Shadow" "dafault" "dafault"
 
 
 init : () -> ( Model, Cmd Msg )
 init _ =
-    ( Model initFigletOp "", Cmd.none )
+    ( Model initFigletOp "" FontList.fontList, Cmd.none )
 
 
 
@@ -69,11 +70,17 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ Html.form []
+        [ div [] [ select [] (List.map pullDownMenu model.fontList) ]
+        , Html.form []
             [ input [ value model.figletOp.inputText, onInput Input ] []
             ]
         , div [ class "textarea" ] [ textarea [ rows 30, cols 100 ] [ text model.figletChars ] ]
         ]
+
+
+pullDownMenu : String -> Html Msg
+pullDownMenu font =
+    option [ value font ] [ text font ]
 
 
 main : Program () Model Msg

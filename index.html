@@ -22,9 +22,9 @@
         app.ports.inputFigletJS.subscribe(function(figletOp){
 
             figlet.text(figletOp.inputText, {
-                font: "Ghost",
-                horizontalLayout: 'dafault',
-                verticalLayout: 'dafault'
+                font: figletOp.font,
+                horizontalLayout: figletOp.horizontalLayout,
+                verticalLayout: figletOp.verticalLayout
             }, function(err, data) {
                 if(err) {
                     console.log('something went wrong');
