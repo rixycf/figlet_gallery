@@ -39,6 +39,7 @@ init _ =
 type Msg
     = Input String
     | ReceiveFiglet String
+    | SelectFont String
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -53,6 +54,9 @@ update msg model =
                     { figOp | inputText = input }
             in
             ( { model | figletOp = newFigOp }, inputFigletJS newFigOp )
+
+        SelectFont font ->
+            ( model, Cmd.none )
 
         ReceiveFiglet figlet ->
             ( { model | figletChars = figlet }, Cmd.none )
