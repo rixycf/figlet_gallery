@@ -19,27 +19,33 @@
           node: document.getElementById('elm')
         });
 
-        app.ports.inputFigletJS.subscribe(function(input){
-            figlet(input, "Banner", function(err, text){
-                if (err) {
+        app.ports.inputFigletJS.subscribe(function(figletOp){
+
+            figlet.text(figletOp.inputText, {
+                font: "Ghost",
+                horizontalLayout: 'dafault',
+                verticalLayout: 'dafault'
+            }, function(err, data) {
+                if(err) {
                     console.log('something went wrong');
-                    console.dir(err);
+                    console.dif(err);
                     return;
                 }
-                app.ports.receiveFiglet.send(text);
+                app.ports.receiveFiglet.send(data);
             });
         });
+
 
     </script> 
     </body>
 </html>
-        <!-- app.ports.inputInfo.subscribe(function(obj) { -->
-        <!-- figlet(obj.input, obj.font, function(err, text) { -->
+        <!-- app.ports.inputFigletJS.subscribe(function(input){ -->
+        <!--     figlet(input, "Banner", function(err, text){ -->
         <!--         if (err) { -->
-        <!--             console.log('something went wrong...'); -->
+        <!--             console.log('something went wrong'); -->
         <!--             console.dir(err); -->
         <!--             return; -->
         <!--         } -->
-        <!--     app.ports.figletText.send(text) -->
+        <!--         app.ports.receiveFiglet.send(text); -->
         <!--     }); -->
         <!-- }); -->
