@@ -3,7 +3,7 @@ port module Main exposing (main)
 import Browser
 import FontList
 import Html exposing (..)
-import Html.Attributes exposing (class, cols, rows, value)
+import Html.Attributes exposing (class, cols, rows, selected, value)
 import Html.Events as Events exposing (onInput)
 import Json.Decode as Json
 
@@ -82,12 +82,16 @@ view model =
             SelectFont selectedValue
     in
     div []
-        [ div []
-            [ select [ onChange handler ] (List.map pullDownMenu model.fontList) ]
-        , Html.form []
-            [ input [ value model.figletOp.inputText, onInput Input ] []
+        [ div [] [ h1 [ class "title" ] [ text "Figlet Generator" ] ]
+        , div []
+            [ text "Font", select [ onChange handler ] (List.map pullDownMenu model.fontList) ]
+        , div []
+            [ text "TextField"
+            , Html.form []
+                [ input [ value model.figletOp.inputText, onInput Input ] []
+                ]
             ]
-        , div [ class "textarea" ] [ textarea [ rows 30, cols 100 ] [ text model.figletChars ] ]
+        , div [ class "textarea" ] [ textarea [ rows 30, cols 80 ] [ text model.figletChars ] ]
         ]
 
 
@@ -99,6 +103,10 @@ onChange handler =
 pullDownMenu : String -> Html Msg
 pullDownMenu font =
     option [ value font ] [ text font ]
+
+
+
+-- Main
 
 
 main : Program () Model Msg
