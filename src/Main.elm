@@ -3,7 +3,7 @@ port module Main exposing (main)
 import Browser
 import FontList
 import Html exposing (..)
-import Html.Attributes exposing (class, cols, placeholder, readonly, rows, selected, value)
+import Html.Attributes exposing (class, cols, placeholder, readonly, rows, selected, type_, value)
 import Html.Events as Events exposing (onInput)
 import Json.Decode as Json
 
@@ -90,8 +90,7 @@ view model =
         , div [] [ text "TextField" ]
         , div []
             [ Html.form []
-                [ input [ value model.figletOp.inputText, onInput Input, placeholder "text field" ] []
-                ]
+                [ textarea [ value model.figletOp.inputText, onInput Input, rows 4, cols 40 ] [] ]
             ]
         , div [] [ h2 [] [ text "Result" ] ]
         , div [ class "resultArea" ] [ textarea [ rows 30, cols 80, readonly True ] [ text model.figletChars ] ]
