@@ -1,11 +1,18 @@
 .title {
-    color:#fff;
+    text-align:center;
 }
 body {
+    /* color:#ffffff; */
+    margin: 0 auto;
+    color:rgb(255,255,255);
     background-color: rgb(62,78,127);
 }
+.resultArea {
+    margin:0 auto;
+}
+
 textarea {
-    color: #00FF00;
-    background-color: #000000;
-  font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
+    color: rgb(144,170,255);
+    background-color: #444444;
+    font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
 }
