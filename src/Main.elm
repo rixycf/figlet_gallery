@@ -26,12 +26,25 @@ type alias FigletOp =
 
 initFigletOp : FigletOp
 initFigletOp =
-    FigletOp "" "ANSI Shadow" "dafault" "dafault"
+    FigletOp "Welcome!" "ANSI Shadow" "dafault" "dafault"
+
+
+initFigletChars : String
+initFigletChars =
+    """
+██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗
+██║    ██║██╔════╝██║     ██╔════╝██╔═══██╗████╗ ████║██╔════╝
+██║ █╗ ██║█████╗  ██║     ██║     ██║   ██║██╔████╔██║█████╗  
+██║███╗██║██╔══╝  ██║     ██║     ██║   ██║██║╚██╔╝██║██╔══╝  
+╚███╔███╔╝███████╗███████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗
+ ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝
+                                                              
+    """
 
 
 init : () -> ( Model, Cmd Msg )
 init _ =
-    ( Model initFigletOp "" FontList.fontList, Cmd.none )
+    ( Model initFigletOp initFigletChars FontList.fontList, Cmd.none )
 
 
 
@@ -84,6 +97,7 @@ view model =
     div []
         [ div []
             [ h1 [] [ text "Figlet Generator" ] ]
+        , div [] [ h2 [] [ text "\"Figlet Generator\" genarate ASCII art" ] ]
         , div [] [ text "Font" ]
         , div []
             [ select [ onChange handler ] (List.map pullDownMenu model.fontList) ]
