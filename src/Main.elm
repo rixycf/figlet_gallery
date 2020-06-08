@@ -2,6 +2,7 @@ port module Main exposing (main)
 
 import Browser
 import FontList
+import GeneratedFigList
 import Html exposing (..)
 import Html.Attributes exposing (class, cols, placeholder, readonly, rows, selected, type_, value)
 import Html.Events as Events exposing (onInput)
@@ -13,7 +14,7 @@ import Json.Decode as Json
 
 
 type alias Model =
-    { figletOp : FigletOp, figletChars : String, fontList : List String }
+    { figletOp : FigletOp, figletChars : String, fontList : List String, figList : List String }
 
 
 type alias FigletOp =
@@ -44,7 +45,7 @@ initFigletChars =
 
 init : () -> ( Model, Cmd Msg )
 init _ =
-    ( Model initFigletOp initFigletChars FontList.fontList, Cmd.none )
+    ( Model initFigletOp initFigletChars FontList.fontList GeneratedFigList.figlet, Cmd.none )
 
 
 
@@ -107,7 +108,8 @@ view model =
                 [ textarea [ value model.figletOp.inputText, onInput Input, rows 4, cols 40 ] [] ]
             ]
         , div [] [ h2 [] [ text "Result" ] ]
-        , div [ class "resultArea" ] [ textarea [ rows 30, cols 80, readonly True ] [ text model.figletChars ] ]
+        , div [] [ textarea [ class "resultArea", rows 30, cols 80, readonly True ] [ text model.figletChars ] ]
+        , div [ class "gallery" ] (List.map (\font -> textarea [ rows 15, cols 100 ] [ text font ]) model.figList)
         ]
 
 

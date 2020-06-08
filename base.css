@@ -9,9 +9,13 @@ body {
     background-color: rgb(62,78,127);
 }
 .resultArea {
+    color: rgb(144,170,255);
+    background-color: #444444;
+    font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
 }
 
-textarea {
+
+.gallery textarea {
     color: rgb(144,170,255);
     background-color: #444444;
     font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
