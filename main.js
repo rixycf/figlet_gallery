@@ -5284,7 +5284,6 @@ var $elm$core$List$drop = F2(
 		}
 	});
 var $elm$html$Html$form = _VirtualDom_node('form');
-var $elm$html$Html$h1 = _VirtualDom_node('h1');
 var $elm$html$Html$h2 = _VirtualDom_node('h2');
 var $elm$html$Html$br = _VirtualDom_node('br');
 var $elm$html$Html$Attributes$rows = function (n) {
@@ -5367,6 +5366,7 @@ var $elm$html$Html$Events$onInput = function (tagger) {
 			$elm$html$Html$Events$alwaysStop,
 			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
 };
+var $elm$html$Html$pre = _VirtualDom_node('pre');
 var $elm$html$Html$option = _VirtualDom_node('option');
 var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
 var $author$project$Main$pullDownMenu = function (font) {
@@ -5535,11 +5535,11 @@ var $author$project$Main$view = function (model) {
 				_List_fromArray(
 					[
 						A2(
-						$elm$html$Html$h1,
+						$elm$html$Html$pre,
 						_List_Nil,
 						_List_fromArray(
 							[
-								$elm$html$Html$text('Figlet Generator')
+								$elm$html$Html$text('\n ███████████  ███           ████            █████   \n░░███░░░░░░█ ░░░           ░░███           ░░███    \n ░███   █ ░  ████   ███████ ░███   ██████  ███████  \n ░███████   ░░███  ███░░███ ░███  ███░░███░░░███░   \n ░███░░░█    ░███ ░███ ░███ ░███ ░███████   ░███    \n ░███  ░     ░███ ░███ ░███ ░███ ░███░░░    ░███ ███\n █████       █████░░███████ █████░░██████   ░░█████ \n░░░░░       ░░░░░  ░░░░░███░░░░░  ░░░░░░     ░░░░░  \n                   ███ ░███                         \n                  ░░██████                          \n                   ░░░░░░                           \n   █████████                                                    █████                      \n  ███░░░░░███                                                  ░░███                       \n ███     ░░░   ██████  ████████    ██████  ████████   ██████   ███████    ██████  ████████ \n░███          ███░░███░░███░░███  ███░░███░░███░░███ ░░░░░███ ░░░███░    ███░░███░░███░░███\n░███    █████░███████  ░███ ░███ ░███████  ░███ ░░░   ███████   ░███    ░███ ░███ ░███ ░░░ \n░░███  ░░███ ░███░░░   ░███ ░███ ░███░░░   ░███      ███░░███   ░███ ███░███ ░███ ░███     \n ░░█████████ ░░██████  ████ █████░░██████  █████    ░░████████  ░░█████ ░░██████  █████    \n  ░░░░░░░░░   ░░░░░░  ░░░░ ░░░░░  ░░░░░░  ░░░░░      ░░░░░░░░    ░░░░░   ░░░░░░  ░░░░░     \n')
 							]))
 					])),
 				A2(
@@ -5552,7 +5552,7 @@ var $author$project$Main$view = function (model) {
 						_List_Nil,
 						_List_fromArray(
 							[
-								$elm$html$Html$text('\"Figlet Generator\" genarate ASCII art')
+								$elm$html$Html$text('\"Figlet Generator\" generate ASCII art')
 							]))
 					])),
 				A2(
