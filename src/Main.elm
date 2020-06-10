@@ -45,7 +45,7 @@ initFigletChars =
 
 init : () -> ( Model, Cmd Msg )
 init _ =
-    ( Model initFigletOp initFigletChars FontList.fontList GeneratedFigList.figlet, Cmd.none )
+    ( Model initFigletOp initFigletChars FontList.fontList GeneratedFigList.generatedFigList, Cmd.none )
 
 
 
@@ -94,6 +94,9 @@ view model =
     let
         handler selectedValue =
             SelectFont selectedValue
+
+        half =
+            round (toFloat (List.length model.fontList) / 2)
     in
     div []
         [ div []
@@ -108,9 +111,29 @@ view model =
                 [ textarea [ value model.figletOp.inputText, onInput Input, rows 4, cols 40 ] [] ]
             ]
         , div [] [ h2 [] [ text "Result" ] ]
-        , div [] [ textarea [ class "resultArea", rows 30, cols 80, readonly True ] [ text model.figletChars ] ]
-        , div [ class "gallery" ] (List.map (\font -> textarea [ rows 15, cols 100 ] [ text font ]) model.figList)
+        , div [] [ textarea [ class "resultArea", rows 15, cols 80, readonly True ] [ text model.figletChars ] ]
+        , h2 [] [ text "---- Gallery ----" ]
+        , div [ class "row" ]
+            [ div [ class "column" ]
+                (List.map2
+                    map2func
+                    (List.take half model.fontList)
+                    (List.take half model.figList)
+                )
+            , div
+                [ class "column" ]
+                (List.map2
+                    map2func
+                    (List.drop half model.fontList)
+                    (List.drop half model.figList)
+                )
+            ]
         ]
+
+
+map2func : String -> String -> Html msg
+map2func font fig =
+    div [] [ text font, br [] [], textarea [ rows 15, cols 50 ] [ text fig ] ]
 
 
 onChange : (String -> msg) -> Attribute msg
