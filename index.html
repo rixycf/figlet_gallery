@@ -35,6 +35,22 @@
             });
         });
 
+        app.ports.galleryInputFigletJS.subscribe(function(figletOp){
+
+            figlet.text(figletOp.inputText, {
+                font: figletOp.font,
+                horizontalLayout: figletOp.horizontalLayout,
+                verticalLayout: figletOp.verticalLayout
+            }, function(err, data) {
+                if(err) {
+                    console.log('something went wrong');
+                    console.dif(err);
+                    return;
+                }
+                app.ports.receiveGalleryFig.send(data);
+            });
+        });
+
 
     </script> 
     </body>
