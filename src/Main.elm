@@ -74,14 +74,19 @@ update msg model =
     case msg of
         Input input ->
             let
+                figOp =
+                    model.figletGenerator.figletOp
+
                 newFigOp =
-                    updateFigletOpInputText model.figletGenerator.figletOp input
+                    { figOp | inputText = input }
+
+                figletGenerator =
+                    model.figletGenerator
+
+                newFigGen =
+                    { figletGenerator | figletOp = newFigOp }
             in
-            ( newFigOp
-                |> asFigletOpIn model.figletGenerator
-                |> asFigGenIn model
-            , inputFigletJS newFigOp
-            )
+            ( { model | figletGenerator = newFigGen }, inputFigletJS newFigOp )
 
         SelectFont newFont ->
             let
@@ -309,18 +314,3 @@ initFigletChars =
  ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝
                                                               
     """
-
-
-updateFigletOpInputText : FigletOp -> String -> FigletOp
-updateFigletOpInputText fo newText =
-    { fo | inputText = newText }
-
-
-asFigletOpIn : FigletGenerator -> FigletOp -> FigletGenerator
-asFigletOpIn fg newFigletOp =
-    { fg | figletOp = newFigletOp }
-
-
-asFigGenIn : Model -> FigletGenerator -> Model
-asFigGenIn model newFigGen =
-    { model | figletGenerator = newFigGen }

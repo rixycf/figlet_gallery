@@ -5194,18 +5194,6 @@ var $author$project$Main$subscriptions = function (model) {
 				$author$project$Main$receiveGalleryFig($author$project$Main$GalleryReceiveFig)
 			]));
 };
-var $author$project$Main$asFigGenIn = F2(
-	function (model, newFigGen) {
-		return _Utils_update(
-			model,
-			{figletGenerator: newFigGen});
-	});
-var $author$project$Main$asFigletOpIn = F2(
-	function (fg, newFigletOp) {
-		return _Utils_update(
-			fg,
-			{figletOp: newFigletOp});
-	});
 var $elm$json$Json$Encode$object = function (pairs) {
 	return _Json_wrap(
 		A3(
@@ -5260,23 +5248,23 @@ var $author$project$Main$inputFigletJS = _Platform_outgoingPort(
 					$elm$json$Json$Encode$string($.verticalLayout))
 				]));
 	});
-var $author$project$Main$updateFigletOpInputText = F2(
-	function (fo, newText) {
-		return _Utils_update(
-			fo,
-			{inputText: newText});
-	});
 var $author$project$Main$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
 			case 'Input':
 				var input = msg.a;
-				var newFigOp = A2($author$project$Main$updateFigletOpInputText, model.figletGenerator.figletOp, input);
+				var figletGenerator = model.figletGenerator;
+				var figOp = model.figletGenerator.figletOp;
+				var newFigOp = _Utils_update(
+					figOp,
+					{inputText: input});
+				var newFigGen = _Utils_update(
+					figletGenerator,
+					{figletOp: newFigOp});
 				return _Utils_Tuple2(
-					A2(
-						$author$project$Main$asFigGenIn,
+					_Utils_update(
 						model,
-						A2($author$project$Main$asFigletOpIn, model.figletGenerator, newFigOp)),
+						{figletGenerator: newFigGen}),
 					$author$project$Main$inputFigletJS(newFigOp));
 			case 'SelectFont':
 				var newFont = msg.a;
