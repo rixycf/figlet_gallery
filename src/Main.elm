@@ -14,15 +14,24 @@ import Json.Decode as Json
 
 
 type alias Model =
-    { figletGenerator : FigletGenerator, gallery : Gallery }
+    { figletGenerator : FigletGenerator
+    , gallery : Gallery
+    }
 
 
 type alias FigletGenerator =
-    { figletOp : FigletOp, receiveFiglet : String, fontList : List String }
+    { figletOp : FigletOp
+    , receiveFiglet : String
+    , fontList : List String
+    }
 
 
 type alias Gallery =
-    { figletOp : FigletOp, receiveFiglet : String, fontList : List String, figList : List String }
+    { figletOp : FigletOp
+    , receiveFiglet : String
+    , fontList : List String
+    , figList : List String
+    }
 
 
 type alias FigletOp =
@@ -41,7 +50,7 @@ initFigletOp =
 init : () -> ( Model, Cmd Msg )
 init _ =
     ( Model
-        (FigletGenerator initFigletOp "" FontList.fontList)
+        (FigletGenerator initFigletOp initFigletChars FontList.fontList)
         (Gallery initFigletOp "" FontList.fontList GeneratedFigList.generatedFigList)
     , Cmd.none
     )
@@ -161,30 +170,29 @@ view model =
             [ pre []
                 [ text titleFig
                 ]
+            , h2 [] [ text "\"Figlet Generator\" generate ASCII art" ]
             ]
-        , div [] [ h2 [] [ text "\"Figlet Generator\" generate ASCII art" ] ]
-        , div [] [ text "Font" ]
-        , div []
-            [ select [ onChange handler ] (List.map pullDownMenu model.figletGenerator.fontList) ]
-        , div [] [ text "TextField" ]
-        , div []
-            [ Html.form []
+        , div [ class "FigletGenerator" ]
+            [ text "Font"
+            , select [ onChange handler ] (List.map pullDownMenu model.figletGenerator.fontList)
+            , h3 [] [ text "TextField" ]
+            , Html.form []
                 [ textarea [ value model.figletGenerator.figletOp.inputText, onInput Input, rows 4, cols 40 ] [] ]
+            , h2 [] [ text "Result" ]
+            , textarea [ class "resultArea", rows 15, cols 80, readonly True ] [ text model.figletGenerator.receiveFiglet ]
             ]
-        , div [] [ h2 [] [ text "Result" ] ]
-        , div [] [ textarea [ class "resultArea", rows 15, cols 80, readonly True ] [ text model.figletGenerator.receiveFiglet ] ]
         , h2 [] [ text "---- Gallery ----" ]
         , div [ class "row" ]
             [ div [ class "column" ]
                 (List.map2
-                    mapfunc
+                    figletSample
                     (List.take half model.gallery.fontList)
                     (List.take half model.gallery.figList)
                 )
             , div
                 [ class "column" ]
                 (List.map2
-                    mapfunc
+                    figletSample
                     (List.drop half model.gallery.fontList)
                     (List.drop half model.gallery.figList)
                 )
@@ -193,9 +201,9 @@ view model =
             [ a [ href "#!", class "modal-overlay" ] []
             , div [ class "modal-window" ]
                 [ div [ class "modal-content" ]
-                    [ h2 [] [ text "test" ]
+                    [ h2 [] [ text "textarea" ]
                     , textarea [ value model.gallery.figletOp.inputText, onInput GalleryInput, rows 5, cols 40 ] []
-                    , h2 [] [ text "test" ]
+                    , h2 [] [ text "Result" ]
                     , textarea [ rows 20, cols 70 ] [ text model.gallery.receiveFiglet ]
                     ]
                 , a [ href "#!", class "modal-close" ] []
@@ -204,31 +212,12 @@ view model =
         ]
 
 
-mapfunc : String -> String -> Html Msg
-mapfunc fontName fig =
+figletSample : String -> String -> Html Msg
+figletSample fontName fig =
     div []
-        [ a [ onClick (Click fontName), href "#modal" ] [ pre [] [ text fig ] ]
+        [ text fontName
+        , a [ onClick (Click fontName), href "#modal" ] [ pre [] [ text fig ] ]
         ]
-
-
-
--- [ button [ href "#modal" ] [ pre [] [ text fig ] ]
--- ]
--- mapfunc : String -> String -> Html msg
--- mapfunc fontName fig =
---     div []
---         [ a [ href ("#" ++ fontName) ] [ pre [] [ text fig ] ]
---         , div [ class "modal-wrapper", id fontName ]
---             [ a [ href "#!", class "modal-overlay" ] []
---             , div [ class "modal-window" ]
---                 [ div [ class "modal-content" ]
---                     [ textarea [] []
---                     , textarea [ rows 20, cols 20 ] []
---                     ]
---                 , a [ href "#!", class "modal-close" ] []
---                 ]
---             ]
---         ]
 
 
 onChange : (String -> msg) -> Attribute msg
