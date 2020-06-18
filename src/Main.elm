@@ -4,7 +4,7 @@ import Browser
 import FontList
 import GeneratedFigList
 import Html exposing (..)
-import Html.Attributes exposing (class, cols, href, id, placeholder, readonly, rows, selected, type_, value)
+import Html.Attributes exposing (autofocus, class, cols, href, id, placeholder, readonly, rows, selected, type_, value)
 import Html.Events as Events exposing (onClick, onInput)
 import Json.Decode as Json
 
@@ -182,7 +182,7 @@ view model =
             , select [ onChange handler ] (List.map pullDownMenu model.figletGenerator.fontList)
             , h3 [] [ text "TextField" ]
             , Html.form []
-                [ textarea [ value model.figletGenerator.figletOp.inputText, onInput Input, rows 4, cols 40 ] [] ]
+                [ textarea [ autofocus True, value model.figletGenerator.figletOp.inputText, onInput Input, rows 4, cols 40 ] [] ]
             , h2 [] [ text "Result" ]
             , textarea [ class "resultArea", rows 15, cols 80, readonly True ] [ text model.figletGenerator.receiveFiglet ]
             ]
@@ -209,7 +209,7 @@ view model =
                     [ h2 [] [ text "textarea" ]
                     , textarea [ value model.gallery.figletOp.inputText, onInput GalleryInput, rows 5, cols 40 ] []
                     , h2 [] [ text "Result" ]
-                    , textarea [ rows 20, cols 70 ] [ text model.gallery.receiveFiglet ]
+                    , textarea [ readonly True, rows 20, cols 70 ] [ text model.gallery.receiveFiglet ]
                     ]
                 , a [ href "#!", class "modal-close" ] []
                 ]
@@ -219,7 +219,7 @@ view model =
 
 figletSample : String -> String -> Html Msg
 figletSample fontName fig =
-    div []
+    div [ class "sample_figlet" ]
         [ text fontName
         , a [ onClick (Click fontName), href "#modal" ] [ pre [] [ text fig ] ]
         ]

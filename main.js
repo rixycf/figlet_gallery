@@ -5345,6 +5345,15 @@ var $author$project$Main$SelectFont = function (a) {
 	return {$: 'SelectFont', a: a};
 };
 var $elm$html$Html$a = _VirtualDom_node('a');
+var $elm$json$Json$Encode$bool = _Json_wrap;
+var $elm$html$Html$Attributes$boolProperty = F2(
+	function (key, bool) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			$elm$json$Json$Encode$bool(bool));
+	});
+var $elm$html$Html$Attributes$autofocus = $elm$html$Html$Attributes$boolProperty('autofocus');
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
 		return A2(
@@ -5414,7 +5423,10 @@ var $author$project$Main$figletSample = F2(
 	function (fontName, fig) {
 		return A2(
 			$elm$html$Html$div,
-			_List_Nil,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('sample_figlet')
+				]),
 			_List_fromArray(
 				[
 					$elm$html$Html$text(fontName),
@@ -5495,14 +5507,6 @@ var $author$project$Main$pullDownMenu = function (font) {
 				$elm$html$Html$text(font)
 			]));
 };
-var $elm$json$Json$Encode$bool = _Json_wrap;
-var $elm$html$Html$Attributes$boolProperty = F2(
-	function (key, bool) {
-		return A2(
-			_VirtualDom_property,
-			key,
-			$elm$json$Json$Encode$bool(bool));
-	});
 var $elm$html$Html$Attributes$readonly = $elm$html$Html$Attributes$boolProperty('readOnly');
 var $elm$core$Basics$round = _Basics_round;
 var $elm$html$Html$Attributes$rows = function (n) {
@@ -5703,6 +5707,7 @@ var $author$project$Main$view = function (model) {
 								$elm$html$Html$textarea,
 								_List_fromArray(
 									[
+										$elm$html$Html$Attributes$autofocus(true),
 										$elm$html$Html$Attributes$value(model.figletGenerator.figletOp.inputText),
 										$elm$html$Html$Events$onInput($author$project$Main$Input),
 										$elm$html$Html$Attributes$rows(4),
@@ -5830,6 +5835,7 @@ var $author$project$Main$view = function (model) {
 										$elm$html$Html$textarea,
 										_List_fromArray(
 											[
+												$elm$html$Html$Attributes$readonly(true),
 												$elm$html$Html$Attributes$rows(20),
 												$elm$html$Html$Attributes$cols(70)
 											]),
