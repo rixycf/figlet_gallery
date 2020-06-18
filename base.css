@@ -1,6 +1,6 @@
  pre {
     font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
-    font-size: 15px;
+    font-size: 16px;
     -webkit-transform:scale(0.5);
     -moz-transform:scale(0.5);
     -ms-transform:scale(0.5);
@@ -51,6 +51,7 @@ body {
     width: 100%;
     text-align: left;
     color: rgb(144,170,255);
+    font-size: 16px;
     /* background-color: #000000; */
     /* -webkit-transform:scale(0.8); */
     /* -moz-transform:scale(0.8); */
@@ -130,6 +131,7 @@ body {
 .modal-wrapper .modal-window .modal-content textarea {
     color: rgb(144,170,255);
     background-color: #444444;
+    font-size: 16px;
     font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
 }
 
