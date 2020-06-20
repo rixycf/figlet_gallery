@@ -5726,7 +5726,6 @@ var $author$project$Main$view = function (model) {
 						$elm$html$Html$textarea,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('resultArea'),
 								$elm$html$Html$Attributes$rows(15),
 								$elm$html$Html$Attributes$cols(80),
 								$elm$html$Html$Attributes$readonly(true)
@@ -5815,15 +5814,21 @@ var $author$project$Main$view = function (model) {
 												$elm$html$Html$text('textarea')
 											])),
 										A2(
-										$elm$html$Html$textarea,
+										$elm$html$Html$form,
+										_List_Nil,
 										_List_fromArray(
 											[
-												$elm$html$Html$Attributes$value(model.gallery.figletOp.inputText),
-												$elm$html$Html$Events$onInput($author$project$Main$GalleryInput),
-												$elm$html$Html$Attributes$rows(5),
-												$elm$html$Html$Attributes$cols(40)
-											]),
-										_List_Nil),
+												A2(
+												$elm$html$Html$textarea,
+												_List_fromArray(
+													[
+														$elm$html$Html$Attributes$value(model.gallery.figletOp.inputText),
+														$elm$html$Html$Events$onInput($author$project$Main$GalleryInput),
+														$elm$html$Html$Attributes$rows(5),
+														$elm$html$Html$Attributes$cols(40)
+													]),
+												_List_Nil)
+											])),
 										A2(
 										$elm$html$Html$h2,
 										_List_Nil,
