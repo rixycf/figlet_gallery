@@ -4,7 +4,7 @@ import Browser
 import FontList
 import GeneratedFigList
 import Html exposing (..)
-import Html.Attributes exposing (autofocus, class, cols, href, id, placeholder, readonly, rows, selected, type_, value)
+import Html.Attributes exposing (autofocus, class, cols, href, id, placeholder, readonly, rows, selected, type_, value, wrap)
 import Html.Events as Events exposing (onClick, onInput)
 import Json.Decode as Json
 
@@ -184,7 +184,7 @@ view model =
             , Html.form []
                 [ textarea [ autofocus True, value model.figletGenerator.figletOp.inputText, onInput Input, rows 4, cols 40 ] [] ]
             , h2 [] [ text "Result" ]
-            , textarea [ rows 15, cols 80, readonly True ] [ text model.figletGenerator.receiveFiglet ]
+            , textarea [ rows 15, cols 80, readonly True, wrap "off" ] [ text model.figletGenerator.receiveFiglet ]
             ]
         , h2 [] [ text "---- Gallery ----" ]
         , div [ class "row" ]
@@ -211,7 +211,7 @@ view model =
                         [ textarea [ value model.gallery.figletOp.inputText, onInput GalleryInput, rows 5, cols 40 ] []
                         ]
                     , h2 [] [ text "Result" ]
-                    , textarea [ readonly True, rows 20, cols 70 ] [ text model.gallery.receiveFiglet ]
+                    , textarea [ readonly True, rows 20, cols 70, wrap "off" ] [ text model.gallery.receiveFiglet ]
                     ]
                 , a [ href "#!", class "modal-close" ] []
                 ]

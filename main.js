@@ -5644,6 +5644,7 @@ var $elm$core$List$take = F2(
 	});
 var $elm$html$Html$textarea = _VirtualDom_node('textarea');
 var $author$project$Main$titleFig = '\n ███████████  ███           ████            █████   \n░░███░░░░░░█ ░░░           ░░███           ░░███    \n ░███   █ ░  ████   ███████ ░███   ██████  ███████  \n ░███████   ░░███  ███░░███ ░███  ███░░███░░░███░   \n ░███░░░█    ░███ ░███ ░███ ░███ ░███████   ░███    \n ░███  ░     ░███ ░███ ░███ ░███ ░███░░░    ░███ ███\n █████       █████░░███████ █████░░██████   ░░█████ \n░░░░░       ░░░░░  ░░░░░███░░░░░  ░░░░░░     ░░░░░  \n                   ███ ░███                         \n                  ░░██████                          \n                   ░░░░░░                           \n   █████████                                                    █████                      \n  ███░░░░░███                                                  ░░███                       \n ███     ░░░   ██████  ████████    ██████  ████████   ██████   ███████    ██████  ████████ \n░███          ███░░███░░███░░███  ███░░███░░███░░███ ░░░░░███ ░░░███░    ███░░███░░███░░███\n░███    █████░███████  ░███ ░███ ░███████  ░███ ░░░   ███████   ░███    ░███ ░███ ░███ ░░░ \n░░███  ░░███ ░███░░░   ░███ ░███ ░███░░░   ░███      ███░░███   ░███ ███░███ ░███ ░███     \n ░░█████████ ░░██████  ████ █████░░██████  █████    ░░████████  ░░█████ ░░██████  █████    \n  ░░░░░░░░░   ░░░░░░  ░░░░ ░░░░░  ░░░░░░  ░░░░░      ░░░░░░░░    ░░░░░   ░░░░░░  ░░░░░     \n\n    ';
+var $elm$html$Html$Attributes$wrap = $elm$html$Html$Attributes$stringProperty('wrap');
 var $author$project$Main$view = function (model) {
 	var handler = function (selectedValue) {
 		return $author$project$Main$SelectFont(selectedValue);
@@ -5728,7 +5729,8 @@ var $author$project$Main$view = function (model) {
 							[
 								$elm$html$Html$Attributes$rows(15),
 								$elm$html$Html$Attributes$cols(80),
-								$elm$html$Html$Attributes$readonly(true)
+								$elm$html$Html$Attributes$readonly(true),
+								$elm$html$Html$Attributes$wrap('off')
 							]),
 						_List_fromArray(
 							[
@@ -5842,7 +5844,8 @@ var $author$project$Main$view = function (model) {
 											[
 												$elm$html$Html$Attributes$readonly(true),
 												$elm$html$Html$Attributes$rows(20),
-												$elm$html$Html$Attributes$cols(70)
+												$elm$html$Html$Attributes$cols(70),
+												$elm$html$Html$Attributes$wrap('off')
 											]),
 										_List_fromArray(
 											[
