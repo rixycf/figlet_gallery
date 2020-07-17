@@ -5194,6 +5194,12 @@ var $author$project$Main$subscriptions = function (model) {
 				$author$project$Main$receiveGalleryFig($author$project$Main$GalleryReceiveFig)
 			]));
 };
+var $elm$json$Json$Encode$null = _Json_encodeNull;
+var $author$project$Main$copyGenResult = _Platform_outgoingPort(
+	'copyGenResult',
+	function ($) {
+		return $elm$json$Json$Encode$null;
+	});
 var $elm$json$Json$Encode$object = function (pairs) {
 	return _Json_wrap(
 		A3(
@@ -5318,7 +5324,7 @@ var $author$project$Main$update = F2(
 						model,
 						{gallery: newGallery}),
 					$elm$core$Platform$Cmd$none);
-			default:
+			case 'Click':
 				var newFont = msg.a;
 				var gallery = model.gallery;
 				var figOp = model.gallery.figletOp;
@@ -5333,8 +5339,13 @@ var $author$project$Main$update = F2(
 						model,
 						{gallery: newGallery}),
 					$author$project$Main$galleryInputFigletJS(newFigOp));
+			default:
+				return _Utils_Tuple2(
+					model,
+					$author$project$Main$copyGenResult(_Utils_Tuple0));
 		}
 	});
+var $author$project$Main$Copy = {$: 'Copy'};
 var $author$project$Main$GalleryInput = function (a) {
 	return {$: 'GalleryInput', a: a};
 };
@@ -5354,6 +5365,7 @@ var $elm$html$Html$Attributes$boolProperty = F2(
 			$elm$json$Json$Encode$bool(bool));
 	});
 var $elm$html$Html$Attributes$autofocus = $elm$html$Html$Attributes$boolProperty('autofocus');
+var $elm$html$Html$button = _VirtualDom_node('button');
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
 		return A2(
@@ -5693,6 +5705,16 @@ var $author$project$Main$view = function (model) {
 							]),
 						A2($elm$core$List$map, $author$project$Main$pullDownMenu, model.figletGenerator.fontList)),
 						A2(
+						$elm$html$Html$button,
+						_List_fromArray(
+							[
+								$elm$html$Html$Events$onClick($author$project$Main$Copy)
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('copy')
+							])),
+						A2(
 						$elm$html$Html$h3,
 						_List_Nil,
 						_List_fromArray(
@@ -5727,6 +5749,7 @@ var $author$project$Main$view = function (model) {
 						$elm$html$Html$textarea,
 						_List_fromArray(
 							[
+								$elm$html$Html$Attributes$id('generatedResult'),
 								$elm$html$Html$Attributes$rows(15),
 								$elm$html$Html$Attributes$cols(80),
 								$elm$html$Html$Attributes$readonly(true),

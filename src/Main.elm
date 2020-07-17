@@ -67,6 +67,7 @@ type Msg
     | GalleryInput String
     | GalleryReceiveFig String
     | Click String
+    | Copy
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -156,6 +157,9 @@ update msg model =
             in
             ( { model | gallery = newGallery }, galleryInputFigletJS newFigOp )
 
+        Copy ->
+            ( model, copyGenResult () )
+
 
 
 -- View
@@ -180,11 +184,12 @@ view model =
         , div [ class "FigletGenerator" ]
             [ text "Font"
             , select [ onChange handler ] (List.map pullDownMenu model.figletGenerator.fontList)
+            , button [ onClick Copy ] [ text "copy" ]
             , h3 [] [ text "TextField" ]
             , Html.form []
                 [ textarea [ autofocus True, value model.figletGenerator.figletOp.inputText, onInput Input, rows 4, cols 40 ] [] ]
             , h2 [] [ text "Result" ]
-            , textarea [ rows 15, cols 80, readonly True, wrap "off" ] [ text model.figletGenerator.receiveFiglet ]
+            , textarea [ id "generatedResult", rows 15, cols 80, readonly True, wrap "off" ] [ text model.figletGenerator.receiveFiglet ]
             ]
         , h2 [] [ text "---- Gallery ----" ]
         , div [ class "row" ]
@@ -253,6 +258,9 @@ main =
 
 
 -- Port
+
+
+port copyGenResult : () -> Cmd msg
 
 
 port inputFigletJS : FigletOp -> Cmd msg
