@@ -5862,6 +5862,16 @@ var $author$project$Main$view = function (model) {
 												$elm$html$Html$text('Result')
 											])),
 										A2(
+										$elm$html$Html$button,
+										_List_fromArray(
+											[
+												$elm$html$Html$Events$onClick($author$project$Main$Copy)
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('copy')
+											])),
+										A2(
 										$elm$html$Html$textarea,
 										_List_fromArray(
 											[

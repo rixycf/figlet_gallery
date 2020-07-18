@@ -216,6 +216,7 @@ view model =
                         [ textarea [ value model.gallery.figletOp.inputText, onInput GalleryInput, rows 5, cols 40 ] []
                         ]
                     , h2 [] [ text "Result" ]
+                    , button [ onClick Copy ] [ text "copy" ]
                     , textarea [ readonly True, rows 20, cols 70, wrap "off" ] [ text model.gallery.receiveFiglet ]
                     ]
                 , a [ href "#!", class "modal-close" ] []
