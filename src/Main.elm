@@ -1,5 +1,6 @@
 port module Main exposing (main)
 
+import Array
 import Browser
 import FontList
 import GeneratedFigList
@@ -7,6 +8,7 @@ import Html exposing (..)
 import Html.Attributes exposing (autofocus, class, cols, href, id, placeholder, readonly, rows, selected, type_, value, wrap)
 import Html.Events as Events exposing (onClick, onInput)
 import Json.Decode as Json
+import Random
 
 
 
@@ -68,6 +70,8 @@ type Msg
     | GalleryReceiveFig String
     | Click String
     | Copy
+    | Random
+    | NewSelect Int
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -160,6 +164,31 @@ update msg model =
         Copy ->
             ( model, copyGenResult () )
 
+        Random ->
+            ( model, Random.generate NewSelect (Random.int 0 (List.length FontList.fontList)) )
+
+        NewSelect num ->
+            let
+                arrayFontList =
+                    Array.fromList model.figletGenerator.fontList
+
+                newFont =
+                    arrayFontList |> Array.get num |> Maybe.withDefault "Standard.flf"
+
+                figOp =
+                    model.figletGenerator.figletOp
+
+                newFigOp =
+                    { figOp | font = newFont }
+
+                figletGenerator =
+                    model.figletGenerator
+
+                newFigGen =
+                    { figletGenerator | figletOp = newFigOp }
+            in
+            ( { model | figletGenerator = newFigGen }, inputFigletJS newFigOp )
+
 
 
 -- View
@@ -183,8 +212,9 @@ view model =
             ]
         , div [ class "FigletGenerator" ]
             [ text "Font"
-            , select [ onChange handler ] (List.map pullDownMenu model.figletGenerator.fontList)
+            , select [ onChange handler ] (pullDownMenu model)
             , button [ onClick Copy ] [ text "copy" ]
+            , button [ onClick Random ] [ text "random" ]
             , h3 [] [ text "TextField" ]
             , Html.form []
                 [ textarea [ autofocus True, value model.figletGenerator.figletOp.inputText, onInput Input, rows 4, cols 40 ] [] ]
@@ -238,12 +268,20 @@ onChange handler =
     Events.on "change" (Json.map handler Events.targetValue)
 
 
-pullDownMenu : String -> Html Msg
-pullDownMenu font =
-    option [ value font ] [ text font ]
+pullDownMenu : Model -> List (Html Msg)
+pullDownMenu model =
+    let
+        selectedFont =
+            model.figletGenerator.figletOp.font
+
+        fontList =
+            model.figletGenerator.fontList
+    in
+    List.map (\font -> option [ value font, selected (selectedFont == font) ] [ text font ]) fontList
 
 
 
+-- option [ value font, selected (selectedFont == font) ] [ text font ]
 -- Main
 
 
